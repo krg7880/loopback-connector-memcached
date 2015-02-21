@@ -1,2 +1,2 @@
 # loopback-connector-memcached
-Loopback connector for Memcached 
+Loopback connector for Memcached. This is currently work in progress!
