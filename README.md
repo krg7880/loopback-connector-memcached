@@ -31,6 +31,29 @@ Loopback connector for Memcached. This is currently work in progress, however, i
 }
 ```
 
+## Sample cache.js model
+```javascript
+module.exports = function(Cache) {
+  // enable Memcached CRUD API
+  Cache.api();
+
+  var key = "somekey";
+
+  var data = {
+    name: "Kirk"
+    ,age: 10
+    ,state: "New York"
+  };
+
+  var ttl = 600;
+
+  Cache.put(key, data, ttl, function(e, res) {
+    // do work
+  });
+
+};
+```
+
 ## Sample datasources.json
 ```json
 {
