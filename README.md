@@ -4,6 +4,8 @@ Loopback connector for Memcached. This is currently work in progress, however, i
 
 ## Sample Model JSON (ie: somemodel.json)
 
+- /common/models/somemodel.json
+
 ```json
 {
   "name": "cache",
@@ -31,7 +33,10 @@ Loopback connector for Memcached. This is currently work in progress, however, i
 }
 ```
 
-## Sample cache.js model
+## Sample somemodel.js model 
+
+- /common/models/somemodel.js
+
 ```javascript
 module.exports = function(Cache) {
   // enable Memcached CRUD API
