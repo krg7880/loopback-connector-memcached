@@ -1,4 +1,12 @@
 # loopback-connector-memcached
+
+> Memcached loopback.io connector. Please note this connector is still being developed to work out any kinks or gotchas with the supported operations in the context of the cache server, Memcached. 
+
+StrongLoop Labs projects provide early access to advanced or experimental functionality.  In general, these projects may lack usability, completeness, documentation, and robustness, and may be outdated.
+However, StrongLoop supports these projects: Paying customers can open issues using the StrongLoop customer support system (Zendesk), and community users can report bugs on GitHub.
+
+**NOTE: THIS MODULE IS PRE-RELEASE**
+
 Loopback connector for Memcached. This is currently work in progress, however, it is functional. Used similar to how built in connectors would be used, however, the API may be different with respect to the operations that the Memcached provides. A operation like findAll would be reasonable in the context of Memcached, for example.
 
 
@@ -33,29 +41,16 @@ Loopback connector for Memcached. This is currently work in progress, however, i
 }
 ```
 
-## Sample somemodel.js model 
+## Sample Model JS (ie: somemodel.js)
 
 - /common/models/somemodel.js
 
 ```javascript
 module.exports = function(Cache) {
-  // enable Memcached CRUD API
-  Cache.api();
-
-  var key = "somekey";
-
-  var data = {
-    name: "Kirk"
-    ,age: 10
-    ,state: "New York"
-  };
-
-  var ttl = 600;
-
-  Cache.put(key, data, ttl, function(e, res) {
-    // do work
-  });
-
+  // Add additional remote methods
+  Cache.remoteMethod('<name>', {
+    // config
+  })
 };
 ```
 
@@ -87,4 +82,33 @@ module.exports = function(Cache) {
     }
   }
 }
+```
+
+## Sample boot script (accounts.js) 
+- /server/boot/accounts.js
+```javascript
+module.exports = function(app) {
+  var Cache = app.models.Cache;
+
+  // id: cache key
+  // data: cache data
+  // ttl: cache time to live
+  Cache.create({id: 300, data: JSON.stringify({name: 'My Data'}), ttl: 600}, function(e, res) {
+
+    // find item
+    Cache.find({id: 300}, function(e, res) {
+      console.log('found', e,res);
+    });
+
+    // find one -- same as find
+    Cache.findOne({id: 300}, function(e, res) {
+      console.log('found 2', e,res);
+    });
+
+    // get num records
+    Cache.count(function(e, res) {
+      console.log(arguments);
+    });
+  });
+};
 ```
