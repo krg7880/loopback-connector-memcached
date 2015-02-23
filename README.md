@@ -2,9 +2,6 @@
 
 > Memcached loopback.io connector. Please note this connector is still being developed to work out any kinks or gotchas with the supported operations in the context of the cache server, Memcached. 
 
-Loopback connector for Memcached. This is currently work in progress, however, it is functional. Used similar to how built in connectors would be used, however, the API may be different with respect to the operations that the Memcached provides. A operation like findAll would be reasonable in the context of Memcached, for example.
-
-
 ## Sample Model JSON (ie: somemodel.json)
 
 - /common/models/somemodel.json
