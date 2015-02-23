@@ -5,6 +5,11 @@
 ## Sample Model JSON (ie: somemodel.json)
 
 - /common/models/somemodel.json
+Note that the following properties on a given cache model should include:
+
+* id - Key to use for caching item
+* data - Data to cache
+* ttl - The time to live for the cached item
 
 ```json
 {
@@ -13,10 +18,6 @@
   "base": "PersistedModel",
   "idInjection": false,
   "properties": {
-    "key": {
-      "type": "string",
-      "required": true
-    },
     "data": {
       "type": "string",
       "required": true
