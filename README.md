@@ -2,11 +2,6 @@
 
 > Memcached loopback.io connector. Please note this connector is still being developed to work out any kinks or gotchas with the supported operations in the context of the cache server, Memcached. 
 
-StrongLoop Labs projects provide early access to advanced or experimental functionality.  In general, these projects may lack usability, completeness, documentation, and robustness, and may be outdated.
-However, StrongLoop supports these projects: Paying customers can open issues using the StrongLoop customer support system (Zendesk), and community users can report bugs on GitHub.
-
-**NOTE: THIS MODULE IS PRE-RELEASE**
-
 Loopback connector for Memcached. This is currently work in progress, however, it is functional. Used similar to how built in connectors would be used, however, the API may be different with respect to the operations that the Memcached provides. A operation like findAll would be reasonable in the context of Memcached, for example.
 
 
