@@ -1,11 +1,23 @@
 # loopback-connector-memcached
 
-> Memcached loopback.io connector. Please note this connector is still being developed to work out any kinks or gotchas with the supported operations in the context of the cache server, Memcached. 
+> Memcached loopback.io connector. Please note this connector is still being developed to work out any kinks or gotchas
+> with the supported operations in the context of the cache server, Memcached.
+
+## Why?
+Why not? This is was more of a learning exercise to get acclimated to Loopback.io, however, someone may find it useful.
+One possible use case is to perhaps query your Memcached nodes via HTTP
 
 ## Sample Model JSON (ie: somemodel.json)
 
 - /common/models/somemodel.json
-Note that the following properties on a given cache model should include:
+Note that a strict model representation would include the following properties (see below). However, an empty model
+works just fine:
+
+```bash
+yo loopback:model
+>> enter model name (ie: Memcached)
+>> quit (no properties required)
+```
 
 * id - Key to use for caching item
 * data - Data to cache
