@@ -32,7 +32,7 @@ yo loopback:model
   "base": "PersistedModel",
   "idInjection": false,
   "properties": {
-    "ip": {
+    "id": {
       "type": "string",
       "required": true,
       "id": true,
@@ -81,13 +81,6 @@ module.exports = function(Cache) {
   "db": {
     "name": "db",
     "connector": "memory"
-  },
-  "mongodb": {
-    "port": 27017,
-    "database": "todo-example",
-    "name": "mongodb",
-    "connector": "mongodb",
-    "hostname": "localhost"
   },
   "memcached": {
     "name": "memcached",
