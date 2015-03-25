@@ -5,13 +5,15 @@
 
 ## Why?
 Why not? This is was more of a learning exercise to get acclimated to Loopback.io, however, someone may find it useful.
-One possible use case is to perhaps query your Memcached nodes via HTTP
 
-## Sample Model JSON (ie: somemodel.json)
+## Use cases
+- One Memcached nodes via HTTP
+- Common interface (Client.find(), Client.findOne(), etc)
 
-- /common/models/somemodel.json
-Note that a strict model representation would include the following properties (see below). However, an empty model
-works just fine:
+## Usage
+To effectively use this connector, you need to create a model with the following properties:
+
+- /common/models/memcached.json
 
 ```bash
 yo loopback:model
@@ -30,6 +32,12 @@ yo loopback:model
   "base": "PersistedModel",
   "idInjection": false,
   "properties": {
+    "ip": {
+      "type": "string",
+      "required": true,
+      "id": true,
+      "index": true
+    },
     "data": {
       "type": "string",
       "required": true
@@ -39,16 +47,24 @@ yo loopback:model
       "required": false
     }
   },
-  "validations": [],
-  "relations": {},
-  "acls": [],
-  "methods": []
+  "validations": [
+
+  ],
+  "relations": {
+
+  },
+  "acls": [
+
+  ],
+  "methods": [
+
+  ]
 }
 ```
 
-## Sample Model JS (ie: somemodel.js)
+### Sample Model JS (ie: memcached.js)
 
-- /common/models/somemodel.js
+- /common/models/memcached.js
 
 ```javascript
 module.exports = function(Cache) {
@@ -59,7 +75,7 @@ module.exports = function(Cache) {
 };
 ```
 
-## Sample datasources.json
+### Sample datasources.json
 ```json
 {
   "db": {
@@ -91,29 +107,40 @@ module.exports = function(Cache) {
 
 ## Sample boot script (accounts.js) 
 - /server/boot/accounts.js
+
 ```javascript
 module.exports = function(app) {
   var Cache = app.models.Cache;
 
-  // id: cache key
-  // data: cache data
-  // ttl: cache time to live
-  Cache.create({id: 300, data: JSON.stringify({name: 'My Data'}), ttl: 600}, function(e, res) {
+  var Model = app.models.Memcached;
+  var model = new Model({
+    id: <id>,
+    data: <data>,
+    ttl: <ttl>
+  });
 
-    // find item
-    Cache.find({id: 300}, function(e, res) {
-      console.log('found', e,res);
-    });
+  if (model.isValid(function(valid) {
+    if (!valid) {
+      throw new Error(model.errors[0]);
+    }
 
-    // find one -- same as find
-    Cache.findOne({id: 300}, function(e, res) {
-      console.log('found 2', e,res);
-    });
+    Cache.create(model, function(e, res) {
 
-    // get num records
-    Cache.count(function(e, res) {
-      console.log(arguments);
-    });
+       // find item
+       Cache.find({id: 300}, function(e, res) {
+         console.log('found', e,res);
+       });
+
+       // find one -- same as find
+       Cache.findOne({id: 300}, function(e, res) {
+         console.log('found 2', e,res);
+       });
+
+       // get num records
+       Cache.count(function(e, res) {
+         console.log(arguments);
+       });
+     });
   });
 };
 ```
