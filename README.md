@@ -6,8 +6,8 @@
 ## Why?
 Why not? This is was more of a learning exercise to get acclimated to Loopback.io, however, someone may find it useful.
 
-## Use cases
-- One Memcached nodes via HTTP
+### Use cases
+- Query Memcached nodes via HTTP
 - Common interface (Client.find(), Client.findOne(), etc)
 
 ## Usage
