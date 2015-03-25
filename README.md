@@ -1,7 +1,6 @@
 # loopback-connector-memcached
 
-> Memcached loopback.io connector. Please note this connector is still being developed to work out any kinks or gotchas
-> with the supported operations in the context of the cache server, Memcached.
+> Memcached loopback.io connector. Please fork and enhance or file a bug ticket if you discover any issues.
 
 ## Why?
 Why not? This is was more of a learning exercise to get acclimated to Loopback.io, however, someone may find it useful.
@@ -18,7 +17,6 @@ To effectively use this connector, you need to create a model with the following
 ```bash
 yo loopback:model
 >> enter model name (ie: Memcached)
->> quit (no properties required)
 ```
 
 * id - Key to use for caching item
