@@ -10,11 +10,18 @@
   "license": "ISC",
   "dependencies": {
     "debug": "^2.1.1",
-    "loopback-connector": "^1.2.1",
-    "memcached": "^2.1.0"
+    "loopback-connector": "^4.2.1",
+    "memcached": "^2.2.2"
   },
   "devDependencies": {
-    "mocha": "^2.1.0"
+    "bluebird": "^3.5.0",
+    "eslint": "^4.1.1",
+    "eslint-config-loopback": "^8.0.0",
+    "loopback-datasource-juggler": "^3.9.2",
+    "mocha": "^3.4.2",
+    "rc": "^1.2.1",
+    "should": "^11.2.1",
+    "sinon": "^2.3.6"
   },
   "repository": {
     "type": "git",
