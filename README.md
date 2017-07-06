@@ -52,7 +52,21 @@ module.exports = function(Cache) {
 }
 ```
 
+
 You can find more options on [Memcached](https://github.com/3rd-Eden/memcached)
+
+
+### Sample model-config.json
+```json
+{
+    "memcached": {
+        "datasource": "memcached",
+        "public": false
+    }
+}
+```
+
+
 
 ## Sample script
 - /server/boot/accounts.js
