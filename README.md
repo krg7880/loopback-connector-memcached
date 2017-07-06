@@ -60,7 +60,7 @@ You can find more options on [Memcached](https://github.com/3rd-Eden/memcached)
 ```json
 {
     "memcached": {
-        "datasource": "memcached",
+        "dataSource": "memcached",
         "public": false
     }
 }

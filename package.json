@@ -1,6 +1,6 @@
 {
   "name": "loopback-connector-memcached",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Loopback connector for memcached backend",
   "main": "index.js",
   "scripts": {
