@@ -136,7 +136,7 @@ memcached.get('foo', function (err, data) {
 **memcached.getMulti** Retrieves a bunch of values from multiple keys.
 
 * `keys`: **Array**, all the keys that needs to be fetched
-* `callback`: **Function**, the callback.
+* `callback`: **Function {Optional}**, the callback.
 
 ```js
 memcached.getMulti(['foo', 'bar'], function (err, data) {
@@ -150,7 +150,7 @@ memcached.getMulti(['foo', 'bar'], function (err, data) {
 * `key`: **String** the name of the key
 * `value`: **Mixed** Either a buffer, JSON, number or string that you want to store.
 * `lifetime`: **Number**, how long the data needs to be stored measured in `seconds`
-* `callback`: **Function** the callback
+* `callback`: **Function {Optional}** the callback
 
 ```js
 memcached.set('foo', 'bar', 10, function (err) { /* stuff */ });
@@ -161,7 +161,7 @@ memcached.set('foo', 'bar', 10, function (err) { /* stuff */ });
 * `key`: **String** the name of the key
 * `value`: **Mixed** Either a buffer, JSON, number or string that you want to store.
 * `lifetime`: **Number**, how long the data needs to be replaced measured in `seconds`
-* `callback`: **Function** the callback
+* `callback`: **Function {Optional}** the callback
 
 ```js
 memcached.replace('foo', 'bar', 10, function (err) { /* stuff */ });
@@ -172,7 +172,7 @@ memcached.replace('foo', 'bar', 10, function (err) { /* stuff */ });
 * `key`: **String** the name of the key
 * `value`: **Mixed** Either a buffer, JSON, number or string that you want to store.
 * `lifetime`: **Number**, how long the data needs to be replaced measured in `seconds`
-* `callback`: **Function** the callback
+* `callback`: **Function {Optional}** the callback
 
 ```js
 memcached.add('foo', 'bar', 10, function (err) { /* stuff */ });
@@ -181,7 +181,7 @@ memcached.add('foo', 'bar', 10, function (err) { /* stuff */ });
 **memcached.del** Remove the key from memcached.
 
 * `key`: **String** the name of the key
-* `callback`: **Function** the callback
+* `callback`: **Function {Optional}** the callback
 
 ```js
 memcached.del('foo', function (err) { /* stuff */ });
