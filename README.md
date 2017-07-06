@@ -2,61 +2,19 @@
 
 > Memcached loopback.io connector. Please fork and enhance or file a bug ticket if you discover any issues.
 
-## Why?
-Why not? This is was more of a learning exercise to get acclimated to Loopback.io, however, someone may find it useful.
-
 ### Use cases
 - Query Memcached nodes via HTTP
-- Common interface (Client.find(), Client.findOne(), etc)
+- Uses similar connection as [3rd-Eden/memcached](https://github.com/3rd-Eden/memcached)
 
 ## Usage
-To effectively use this connector, you need to create a model with the following properties:
+To effectively use this connector, you need to create 2 files in your models directory:
 
 - /common/models/memcached.json
 
-```bash
-yo loopback:model
->> enter model name (ie: Memcached)
-```
-
-* id - Key to use for caching item
-* data - Data to cache
-* ttl - The time to live for the cached item
-
 ```json
 {
-  "name": "cache",
-  "plural": "cache",
-  "base": "PersistedModel",
-  "idInjection": false,
-  "properties": {
-    "id": {
-      "type": "string",
-      "required": true,
-      "id": true,
-      "index": true
-    },
-    "data": {
-      "type": "string",
-      "required": true
-    },
-    "ttl": {
-      "type": "number",
-      "required": false
-    }
-  },
-  "validations": [
-
-  ],
-  "relations": {
-
-  },
-  "acls": [
-
-  ],
-  "methods": [
-
-  ]
+  "name": "memcache",
+  "base": "Model"
 }
 ```
 
@@ -73,6 +31,8 @@ module.exports = function(Cache) {
 };
 ```
 
+
+
 ### Sample datasources.json
 ```json
 {
@@ -87,51 +47,128 @@ module.exports = function(Cache) {
       "localhost:11211"
     ],
     "options": {
-      "retries": 10,
-      "retry": 10000,
-      "remove": true,
-      "failOverServers": []
     }
   }
 }
 ```
 
-## Sample boot script (accounts.js) 
+You can find more options on [Memcached](https://github.com/3rd-Eden/memcached)
+
+## Sample script
 - /server/boot/accounts.js
 
 ```javascript
 module.exports = function(app) {
-  var Cache = app.models.Cache;
 
-  var Model = app.models.Memcached;
-  var model = new Model({
-    id: <id>,
-    data: <data>,
-    ttl: <ttl>
-  });
+  var Cache = app.models.memcached;
+  var accountModel = app.models.account;
+  
+  accountModel.find({fields: {id: true}})
+  .then(function(results) {
+    return Cache.set('accountIds', results, 200);
+  })
+  .then(function() {
+    return Cache.get('accountIds');
+  })
+  
 
-  if (model.isValid(function(valid) {
-    if (!valid) {
-      throw new Error(model.errors[0]);
-    }
-
-    Cache.create(model, function(e, res) {
-
-       // find item
-       Cache.find({id: 300}, function(e, res) {
-         console.log('found', e,res);
-       });
-
-       // find one -- same as find
-       Cache.findOne({id: 300}, function(e, res) {
-         console.log('found 2', e,res);
-       });
-
-       // get num records
-       Cache.count(function(e, res) {
-         console.log(arguments);
-       });
-     });
-  });
 };
+```
+
+## Available API 
+#### Some copied from [Memcached](https://github.com/3rd-Eden/memcached)
+
+**ping** Ping the Memcached Server 
+
+* `callback`: **Function**, the callback
+
+```js
+app.dataSources.Memcached.ping(function(err, res) {
+  console.log(res);
+})
+```
+
+**flush** Flush the Memcached Server 
+
+* `callback`: **Function**, the callback
+
+```js
+app.dataSources.Memcached.connector.flush(function(err, res) {
+  console.log(res);
+})
+```
+
+**disconnect** Disconnect from the Memcached Server 
+
+* `callback`: **Function**, the callback
+
+```js
+app.dataSources.Memcached.disconnect(function(err, res) {
+  console.log(res);
+})
+```
+
+**memcached.get** Get the value for the given key.
+
+* `key`: **String**, the key
+* `callback`: **Function {Optional}**, the callback .
+
+```js
+memcached.get('foo', function (err, data) {
+  console.log(data);
+});
+```
+
+**memcached.getMulti** Retrieves a bunch of values from multiple keys.
+
+* `keys`: **Array**, all the keys that needs to be fetched
+* `callback`: **Function**, the callback.
+
+```js
+memcached.getMulti(['foo', 'bar'], function (err, data) {
+  console.log(data.foo);
+  console.log(data.bar);
+});
+```
+
+**memcached.set** Stores a new value in Memcached.
+
+* `key`: **String** the name of the key
+* `value`: **Mixed** Either a buffer, JSON, number or string that you want to store.
+* `lifetime`: **Number**, how long the data needs to be stored measured in `seconds`
+* `callback`: **Function** the callback
+
+```js
+memcached.set('foo', 'bar', 10, function (err) { /* stuff */ });
+```
+
+**memcached.replace** Replaces the value in memcached.
+
+* `key`: **String** the name of the key
+* `value`: **Mixed** Either a buffer, JSON, number or string that you want to store.
+* `lifetime`: **Number**, how long the data needs to be replaced measured in `seconds`
+* `callback`: **Function** the callback
+
+```js
+memcached.replace('foo', 'bar', 10, function (err) { /* stuff */ });
+```
+
+**memcached.add** Add the value, only if it's not in memcached already (will return err if it is).
+
+* `key`: **String** the name of the key
+* `value`: **Mixed** Either a buffer, JSON, number or string that you want to store.
+* `lifetime`: **Number**, how long the data needs to be replaced measured in `seconds`
+* `callback`: **Function** the callback
+
+```js
+memcached.add('foo', 'bar', 10, function (err) { /* stuff */ });
+```
+
+**memcached.del** Remove the key from memcached.
+
+* `key`: **String** the name of the key
+* `callback`: **Function** the callback
+
+```js
+memcached.del('foo', function (err) { /* stuff */ });
 ```

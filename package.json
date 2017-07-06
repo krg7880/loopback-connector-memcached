@@ -1,20 +1,21 @@
 {
   "name": "loopback-connector-memcached",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Loopback connector for memcached backend",
   "main": "index.js",
   "scripts": {
     "test": "npm test"
   },
-  "author": "Kirk Gordon <kirk7880@gmail.com>",
+  "author": "Tim Sexton <tsexton6689@gmail.com> based on code started by Kirk Gordon <kirk7880@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "debug": "^2.1.1",
+    "loopback": "^3.8.0",
     "loopback-connector": "^4.2.1",
-    "memcached": "^2.2.2"
+    "memcached": "^2.2.2",
+    "bluebird": "^3.5.0"
   },
   "devDependencies": {
-    "bluebird": "^3.5.0",
     "eslint": "^4.1.1",
     "eslint-config-loopback": "^8.0.0",
     "loopback-datasource-juggler": "^3.9.2",
@@ -25,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/krg7880/loopback-connector-memcached"
+    "url": "https://github.com/tsexton6689/loopback-connector-memcached"
   },
   "keywords": [
     "loopback",
@@ -34,7 +35,7 @@
     "memcached"
   ],
   "bugs": {
-    "url": "https://github.com/krg7880/loopback-connector-memcached/issues"
+    "url": "https://github.com/tsexton6689/loopback-connector-memcached/issues"
   },
-  "homepage": "https://github.com/krg7880/loopback-connector-memcached"
+  "homepage": "https://github.com/tsexton6689/loopback-connector-memcached"
 }
